@@ -29,7 +29,7 @@ syn match nearleyOperator ","
 syn match nearleyOperator ":+"
 syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
-syn match nearleyOperator ""\zsi"
+syn match nearleyOperator '"\zsi'
 
 syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
 syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
