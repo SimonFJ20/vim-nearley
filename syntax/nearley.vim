@@ -15,11 +15,16 @@ else
   let code_language = "javascript"
 endif
 
+syn match nearleyInclude    "^@include"
 syn match nearleyDirective  "^@builtin"
-syn match nearleyDirective  "^@include"
 syn match nearleyDirective  "^@preprocessor"
 syn match nearleyDirective  "^@lexer"
 syn match nearleyComment    "#.*"
+
+syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
+syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
+syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
+syn match nearleyMixin "$[a-zA-Z0-9_?+]\+"
 
 syn match nearleyOperator "("
 syn match nearleyOperator ")"
@@ -31,12 +36,6 @@ syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
 syn match nearleyOperator '"\zsi'
 
-syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
-syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
-
-syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
-
-syn match nearleyMixin "$[a-zA-Z0-9_?+]\+"
 
 syn region nearleyString start=+"+ skip=+\\.+ end=+"+
 syn region nearleyString start=+\[+ end=+]+
@@ -51,7 +50,8 @@ endif
 
 syn keyword nearleyBuiltin id joiner arrconcat nuller containedin=nearleyCodeBlockPost
 
-hi def link nearleyDirective    Include
+hi def link nearleyInclude      Include
+hi def link nearleyDirective    Macro
 hi def link nearleyComment      Comment
 hi def link nearleyOperator     Operator
 hi def link nearleyBuiltin      Keyword
