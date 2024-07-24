@@ -25,14 +25,18 @@ syn match nearleyOperator "("
 syn match nearleyOperator ")"
 syn match nearleyOperator "->"
 syn match nearleyOperator "|"
+syn match nearleyOperator ","
 syn match nearleyOperator ":+"
 syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
+syn match nearleyOperator ""\zsi"
 
 syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
 syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
 
 syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
+
+syn match nearleyMixin "$[a-zA-Z0-9_?+]\+"
 
 syn region nearleyString start=+"+ skip=+\\.+ end=+"+
 syn region nearleyString start=+\[+ end=+]+
@@ -54,6 +58,7 @@ hi def link nearleyBuiltin      Keyword
 hi def link nearleyString       String
 hi def link nearleyNonTerminal  Identifier
 hi def link nearleyToken        Constant
+hi def link nearleyMixin        Special
 hi def link nealeyCodeQuote     Operator
 
 if exists('old_syntax')
