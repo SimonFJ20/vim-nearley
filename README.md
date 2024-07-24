@@ -2,7 +2,7 @@
 
 Vim syntax highlighting for [nearley](https://github.com/kach/nearley).
 
-The syntax determines to use Typescript or Javascript, depending on if it finds `^@preprocessor typescript`.
+The syntax determines whether to use Typescript or Javascript depending on, if it finds `^@preprocessor typescript`.
 
 ## Install
 
@@ -16,7 +16,7 @@ Using [packer](https://github.com/wbthomason/packer.nvim) in lua
 use { "SimonFJ20/vim-nearley" }
 ```
 
-Using [vim-plug] in vimscript
+Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 ```vim
 Plug 'SimonFJ20/vim-nearley'
 ```
