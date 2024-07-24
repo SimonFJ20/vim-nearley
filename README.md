@@ -21,3 +21,7 @@ Using [vim-plug] in vimscript
 Plug 'SimonFJ20/vim-nearley'
 ```
 
+Using [vim-pathogen](https://github.com/tpope/vim-pathogen)
+
+Clone `SimonFJ20/vim-nearley` into `.vim/bundle/`.
+
