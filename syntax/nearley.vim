@@ -15,40 +15,43 @@ else
   let code_language = "javascript"
 endif
 
-syn match nearleyDirective '\v^\@builtin'
-syn match nearleyDirective '\v^\@include'
-syn match nearleyDirective '\v^\@preprocessor'
-syn match nearleyDirective '\v^\@lexer'
-syn match nearleyComment '\v#.*'
+syn match nearleyDirective  "^@builtin"
+syn match nearleyDirective  "^@include"
+syn match nearleyDirective  "^@preprocessor"
+syn match nearleyDirective  "^@lexer"
+syn match nearleyComment    "#.*"
 
-syn match nearleyOperator /\v\-\>/
-syn match nearleyOperator /\v\|/
-syn match nearleyOperator /\v\:\+/
-syn match nearleyOperator /\v\:\*/
-syn match nearleyOperator /\v\?/
+syn match nearleyOperator "->"
+syn match nearleyOperator "|"
+syn match nearleyOperator ":+"
+syn match nearleyOperator ":\*"
+syn match nearleyOperator "?"
 
-syn match nearleyNonTerminal "\v^[a-zA-Z0-9_?+]+"
+syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
 
-syn region nearleyString start=/\v"/ skip=/\v\\./ end=/\v"/
-syn region nearleyString start="\[" end="]"
+syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
+
+syn region nearleyString start=+"+ skip=+\\.+ end=+"+
+syn region nearleyString start=+\[+ end=+]+
 
 if code_language == "typescript"
-  syn region nearleyCodeBlock matchgroup=quasiQuote start=+@{%+ end=+%}+ contains=@typescript
-  syn region nearleyCodeBlockPost matchgroup=quasiQuote start=+{%+ end=+%}+ contains=@typescript
+  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@typescript
+  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@typescript
 else
-  syn region nearleyCodeBlock matchgroup=quasiQuote start=+@{%+ end=+%}+ contains=@javascript
-  syn region nearleyCodeBlockPost matchgroup=quasiQuote start=+{%+ end=+%}+ contains=@javascript
+  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@javascript
+  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@javascript
 endif
 
 syn keyword nearleyBuiltin id joiner arrconcat nuller containedin=nearleyCodeBlockPost
 
-hi def link quasiQuote          Special
 hi def link nearleyDirective    Include
 hi def link nearleyComment      Comment
 hi def link nearleyOperator     Operator
 hi def link nearleyBuiltin      Keyword
 hi def link nearleyString       String
-hi def link nearleyNonTerminal  Special
+hi def link nearleyNonTerminal  Identifier
+hi def link nearleyToken        Constant
+hi def link nealeyCodeQuote     Operator
 
 if exists('old_syntax')
   let b:current_syntax = old_syntax
