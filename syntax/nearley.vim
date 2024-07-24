@@ -29,7 +29,8 @@ syn match nearleyOperator ":+"
 syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
 
-syn match nearleyNonTerminal "[a-zA-Z0-9_?+]\+"
+syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
+syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
 
 syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
 
