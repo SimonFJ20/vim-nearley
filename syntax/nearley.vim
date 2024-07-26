@@ -21,8 +21,8 @@ syn match nearleyDirective  "^@preprocessor"
 syn match nearleyDirective  "^@lexer"
 syn match nearleyComment    "#.*"
 
-syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+"
-syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+"
+syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+" nextgroup=nearleyMacroArgs
+syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+" nextgroup=nearleyMacroParams
 syn match nearleyToken "%[a-zA-Z0-9_?+]\+"
 syn match nearleyMixin "$[a-zA-Z0-9_?+]\+"
 
@@ -35,20 +35,25 @@ syn match nearleyOperator ","
 syn match nearleyOperator ":+"
 syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
-syn match nearleyOperator '"\zsi'
 
-syn region nearleyString start=+"+ skip="\\." end=+"+
-syn region nearleyString start="`" skip="\\." end="`"
+syn match nearleyStringFlag "i" contained
+syn region nearleyString start=+"+ skip="\\." end=+"+ nextgroup=nearleyStringFlag
+syn region nearleyString start="`" skip="\\." end="`" nextgroup=nearleyStringFlag
 syn region nearleyString start="\[" end="\]"
 
-syn region nearleyMixinList matchgroup=nearleyOperator start="[a-zA-Z0-9_?+]\zs\[" end="\]" transparent
+syn match nearleyMacroParam "[a-zA-Z0-9_?+]\+" contained
+syn region nearleyMacroArgs matchgroup=nearleyOperator start="\[" end="\]" contained contains=ALL
+syn region nearleyMacroParams matchgroup=nearleyOperator start="\[" end="\]" contained contains=nearleyMacroParam,nearleyOperator
+
+hi def link nearleyStringFlag   nearleyOperator
+hi def link nearleyMacroParam   nearleyMixin
 
 if code_language == "typescript"
-  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@typescript
-  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@typescript
+  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@typescript fold
+  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@typescript fold
 else
-  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@javascript
-  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@javascript
+  syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@javascript fold
+  syn region nearleyCodeBlockPost matchgroup=nealeyCodeQuote start=+{%+ end=+%}+ contains=@javascript fold
 endif
 
 syn keyword nearleyBuiltin id joiner arrconcat nuller containedin=nearleyCodeBlockPost
