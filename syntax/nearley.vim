@@ -37,11 +37,11 @@ syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
 syn match nearleyOperator '"\zsi'
 
-syn region nearleyMixinList matchgroup=nearleyOperator start="[a-zA-Z0-9_?+]\zs\[" end="\]" transparent
-
 syn region nearleyString start=+"+ skip="\\." end=+"+
 syn region nearleyString start="`" skip="\\." end="`"
 syn region nearleyString start="\[" end="\]"
+
+syn region nearleyMixinList matchgroup=nearleyOperator start="[a-zA-Z0-9_?+]\zs\[" end="\]" transparent
 
 if code_language == "typescript"
   syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@typescript
