@@ -29,6 +29,7 @@ syn match nearleyMixin "$[a-zA-Z0-9_?+]\+"
 syn match nearleyOperator "("
 syn match nearleyOperator ")"
 syn match nearleyOperator "->"
+syn match nearleyOperator "=>"
 syn match nearleyOperator "|"
 syn match nearleyOperator ","
 syn match nearleyOperator ":+"
@@ -36,9 +37,11 @@ syn match nearleyOperator ":\*"
 syn match nearleyOperator ":?"
 syn match nearleyOperator '"\zsi'
 
+syn region nearleyMixinList matchgroup=nearleyOperator start="[a-zA-Z0-9_?+]\zs\[" end="\]" transparent
 
-syn region nearleyString start=+"+ skip=+\\.+ end=+"+
-syn region nearleyString start=+\[+ end=+]+
+syn region nearleyString start=+"+ skip="\\." end=+"+
+syn region nearleyString start="`" skip="\\." end="`"
+syn region nearleyString start="\[" end="\]"
 
 if code_language == "typescript"
   syn region nearleyCodeBlock matchgroup=nealeyCodeQuote start=+@{%+ end=+%}+ contains=@typescript
@@ -58,7 +61,7 @@ hi def link nearleyBuiltin      Keyword
 hi def link nearleyString       String
 hi def link nearleyNonTerminal  Identifier
 hi def link nearleyToken        Constant
-hi def link nearleyMixin        Special
+hi def link nearleyMixin        PreProc
 hi def link nealeyCodeQuote     Operator
 
 if exists('old_syntax')
