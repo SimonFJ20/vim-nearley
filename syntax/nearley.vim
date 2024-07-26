@@ -42,7 +42,7 @@ syn region nearleyString start="`" skip="\\." end="`" nextgroup=nearleyStringFla
 syn region nearleyString start="\[" end="\]"
 
 syn match nearleyMacroParam "[a-zA-Z0-9_?+]\+" contained
-syn region nearleyMacroArgs matchgroup=nearleyOperator start="\[" end="\]" contained contains=ALL
+syn region nearleyMacroArgs matchgroup=nearleyOperator start="\[" end="\]" contained contains=TOP
 syn region nearleyMacroParams matchgroup=nearleyOperator start="\[" end="\]" contained contains=nearleyMacroParam,nearleyOperator
 
 hi def link nearleyStringFlag   nearleyOperator
