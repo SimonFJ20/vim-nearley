@@ -19,7 +19,7 @@ syn match nearleyInclude    "^@include"
 syn match nearleyDirective  "^@builtin"
 syn match nearleyDirective  "^@preprocessor"
 syn match nearleyDirective  "^@lexer"
-syn match nearleyComment    "//.*"
+syn match nearleyComment    "#.*"
 
 syn match nearleyNonTerminal "\(^@.*\)\@<![a-zA-Z0-9_?+]\+" nextgroup=nearleyMacroArgs
 syn match nearleyNonTerminal "^[a-zA-Z0-9_?+]\+" nextgroup=nearleyMacroParams
